@@ -1,4 +1,6 @@
 const express = require('express')
+const cors = require('cors')//implementar seguridad
+const bodyParser = require('body-parser')//convertir el objeto enviado desde el form
 const { dbConection } = require('../database/config')
 
 //crear array
@@ -8,7 +10,8 @@ class Server{
     constructor(){
         this.app = express()
         this.port= process.env.PORT
-        this.proveedoresPath ='/proveedores'//Ruta de la api
+        this.comprasPath ='/compras'//Ruta de la api
+        this.middlewares()//puente para hacer peticiones entre el html y la api
         this.routes()
         this.conectarDB()
        
@@ -24,14 +27,23 @@ listen(){
 }
 
 routes(){
-    this.app.use(this.proveedoresPath, require('../routes/proveedores'))
+    this.app.use(this.comprasPath, require('../routes/compras'))
    }
+
+   middlewares(){//puente del front-end y el back-end
+    this.app.use( cors()); //Indicar el uso de cors
+    this.app.use(bodyParser.json())//parsear objetos a insertar en la bd
+}
    async conectarDB(){
      await dbConection()
 
 
    }
+
+
+
 }
+
 
 
 module.exports ={Server}//exportacion de la clase.
