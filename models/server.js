@@ -11,6 +11,7 @@ class Server{
         this.app = express()
         this.port= process.env.PORT
         this.comprasPath ='/compras'//Ruta de la api
+        this.cotizacionPath= '/cotizacion'
         this.middlewares()//puente para hacer peticiones entre el html y la api
         this.routes()
         this.conectarDB()
@@ -28,6 +29,7 @@ listen(){
 
 routes(){
     this.app.use(this.comprasPath, require('../routes/compras'))
+    this.app.use(this.cotizacionPath, require('../routes/cotizacion'))
    }
 
    middlewares(){//puente del front-end y el back-end

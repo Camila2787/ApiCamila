@@ -3,18 +3,17 @@ const { Schema, model } = require('mongoose');
 const CompraSchema = new Schema({
     nombreInsumo: {
         type: String,
-        enum: ['tela', 'algodon', 'hilo', 'botones']
     },
     fecha: {
-        type: Date,
-        default: Date.now
+        type: String
     },
     Proveedor: {
         type: String,
-        enum: ['BarahClotes', 'Distribuidora SAS', 'Guildan', 'Disatex', 'Insutex']
+        
     },
     numRecibo: {
-        type: String
+        type: String,
+        unique: true
     },
     IVA: {
         type: String
@@ -23,9 +22,9 @@ const CompraSchema = new Schema({
         type: Number,
         default: 0,
     },
-    imagenRecibo: {
-        type: String
-    },
+    cantidad: {
+        type: Number,
+    }
 });
 
 module.exports = model('Compra', CompraSchema);

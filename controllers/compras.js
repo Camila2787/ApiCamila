@@ -31,18 +31,18 @@ const postCompras = async (req, res) => {
 };
 
 const putCompras = async (req, res) => {
-    const { _id, nombreInsumo, fecha, Proveedor, numRecibo, IVA, total, imagenRecibo } = req.body;
+    const {nombreInsumo, fecha, Proveedor, numRecibo, IVA, total, cantidad} = req.body;
     let mensaje = 'Actualización exitosa';
 
     try {
-        await Compras.findOneAndUpdate({ _id: _id }, {
+        await Compras.findOneAndUpdate({ numRecibo:numRecibo}, {
             nombreInsumo: nombreInsumo,
             fecha: fecha,
             Proveedor: Proveedor,
             numRecibo: numRecibo,
             IVA: IVA,
             total: total,
-            imagenRecibo: imagenRecibo
+            cantidad: cantidad
         });
     } catch (error) {
         mensaje = error;
@@ -54,11 +54,11 @@ const putCompras = async (req, res) => {
 };
 
 const deleteCompras = async (req, res) => {
-    const { id } = req.query;
+    const { numRecibo} = req.query;
     let mensaje = 'Eliminación Exitosa';
 
     try {
-        await Compras.findOneAndDelete({ _id: _id });
+        await Compras.findOneAndDelete({ numRecibo: numRecibo});
     } catch (error) {
         mensaje = error;
     }
