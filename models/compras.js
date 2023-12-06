@@ -1,3 +1,4 @@
+const { Double } = require('mongodb');
 const { Schema, model } = require('mongoose');
 
 const CompraSchema = new Schema({
@@ -24,6 +25,10 @@ const CompraSchema = new Schema({
     },
     cantidad: {
         type: Number,
+    },
+    precioDolar: {
+        type: Number
+
     }
 });
 
